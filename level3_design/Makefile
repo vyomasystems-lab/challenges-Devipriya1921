@@ -10,6 +10,7 @@ DUT      = axis_fifo
 TOPLEVEL = $(DUT)
 MODULE   = test_$(DUT)
 VERILOG_SOURCES = $(PWD)/axis_fifo.v
+PYTHON_SOURCES = $(PWD)/test_axis_fifo.py
 
 # module parameters
 export PARAM_DEPTH ?= 1024
