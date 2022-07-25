@@ -1,5 +1,5 @@
 
-`resetall
+
 `timescale 1ns / 1ps
 `default_nettype none
 
@@ -279,5 +279,3 @@ always @(posedge clk) begin
 end
 
 endmodule
-
-`resetall
