@@ -9,7 +9,7 @@ COCOTB_HDL_TIMEPRECISION = 1ps
 DUT      = axis_fifo
 TOPLEVEL = $(DUT)
 MODULE   = test_$(DUT)
-VERILOG_SOURCES += ../../rtl/$(DUT).v
+VERILOG_SOURCES = $(PWD)/axis_fifo.v
 
 # module parameters
 export PARAM_DEPTH ?= 1024
