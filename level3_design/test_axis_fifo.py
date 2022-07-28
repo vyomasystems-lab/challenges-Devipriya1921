@@ -5,7 +5,7 @@ import logging
 import os
 import random
 
-import cocotb.simulator
+import cocotb_test.simulator
 import pytest
 
 import cocotb
@@ -327,7 +327,7 @@ def test_axis_fifo(request, data_width, frame_fifo, drop_oversize_frame, drop_ba
     sim_build = os.path.join(tests_dir, "sim_build",
         request.node.name.replace('[', '-').replace(']', ''))
 
-    cocotb.simulator.run(
+    cocotb_test.simulator.run(
         python_search=[tests_dir],
         verilog_sources=verilog_sources,
         toplevel=toplevel,
