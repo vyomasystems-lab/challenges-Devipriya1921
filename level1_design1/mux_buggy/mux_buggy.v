@@ -1,6 +1,6 @@
 // See LICENSE.vyoma for details
 
-module mux(sel,inp0, inp1, inp2, inp3, inp4, inp5, inp6, inp7, inp8, 
+module mux_buggy(sel,inp0, inp1, inp2, inp3, inp4, inp5, inp6, inp7, inp8, 
            inp9, inp10, inp11, inp12, inp13, inp14, inp15, inp16, inp17,
            inp18, inp19, inp20, inp21, inp22, inp23, inp24, inp25, inp26,
            inp27, inp28, inp29, inp30, out);
@@ -17,16 +17,12 @@ module mux(sel,inp0, inp1, inp2, inp3, inp4, inp5, inp6, inp7, inp8,
 
   // Based on sel signal value, one of the inp0-inp30 gets assigned to the 
   // output signal
-  always @(sel or inp0  or inp1 or  inp2 or inp3 or inp4 or inp5 or inp6 or
-            inp7 or inp8 or inp9 or inp10 or inp11 or inp12 or inp13 or 
-            inp14 or inp15 or inp16 or inp17 or inp18 or inp19 or inp20 or
-            inp21 or inp22 or inp23 or inp24 or inp25 or inp26 or inp27 or 
-            inp28 or inp29 or inp30 )
+  always @(sel)
 
   begin
-    case(sel)
-      5'b00000: out = inp0;  
-      5'b00001: out = inp1;  
+    case(out)
+      5'b00000: out = inp29;  
+      5'b00001: out = inp28;  
       5'b00010: out = inp2;  
       5'b00011: out = inp3;  
       5'b00100: out = inp4;  
