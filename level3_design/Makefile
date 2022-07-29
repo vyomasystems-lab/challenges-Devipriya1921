@@ -13,4 +13,4 @@ MODULE   :=  test_axis_fifo        # test
 include $(shell cocotb-config --makefiles)/Makefile.sim
 
 clean_all: clean
-	rm -rf *.xml sim_build _pycache_
+	rm -rf *.xml sim_build __pycache__ 

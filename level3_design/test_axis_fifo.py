@@ -29,6 +29,7 @@ import os
 import random
 
 import cocotb_test.simulator
+import pytest
 
 import cocotb
 from cocotb.clock import Clock
@@ -37,8 +38,6 @@ from cocotb.regression import TestFactory
 
 from cocotbext.axi import AxiStreamBus, AxiStreamFrame, AxiStreamSource, AxiStreamSink
 
-axis_source = AxiStreamSource(AxiStreamBus.from_prefix(dut, "s_axis"), dut.clk, dut.rst)
-axis_sink = AxiStreamSink(AxiStreamBus.from_prefix(dut, "m_axis"), dut.clk, dut.rst)
 
 class TB(object):
     def __init__(self, dut):
@@ -121,15 +120,10 @@ async def run_test_tuser_assert(dut):
     test_frame = AxiStreamFrame(test_data, tuser=1)
     await tb.source.send(test_frame)
 
-    if int(os.getenv("PARAM_DROP_BAD_FRAME")):
-        for k in range(64):
-            await RisingEdge(dut.clk)
+    rx_frame = await tb.sink.recv()
 
-    else:
-        rx_frame = await tb.sink.recv()
-
-        assert rx_frame.tdata == test_data
-        assert rx_frame.tuser
+    assert rx_frame.tdata == test_data
+    assert rx_frame.tuser
 
     assert tb.sink.empty()
 
@@ -210,15 +204,10 @@ async def run_test_overflow(dut):
 
     tb.sink.pause = False
 
-    if int(os.getenv("PARAM_DROP_OVERSIZE_FRAME")):
-        for k in range(2048):
-            await RisingEdge(dut.clk)
+    rx_frame = await tb.sink.recv()
 
-    else:
-        rx_frame = await tb.sink.recv()
-
-        assert rx_frame.tdata == test_data
-        assert not rx_frame.tuser
+    assert rx_frame.tdata == test_data
+    assert not rx_frame.tuser
 
     assert tb.sink.empty()
 
@@ -313,8 +302,9 @@ tests_dir = os.path.dirname(__file__)
 rtl_dir = os.path.abspath(os.path.join(tests_dir, '..', '..', 'rtl'))
 
 
-
-def test_axis_fifo(request, data_width, frame_fifo, drop_oversize_frame, drop_bad_frame, drop_when_full):
+@pytest.mark.parametrize("data_width", [8, 16])
+@pytest.mark.parametrize("length", list(range(17)))
+def test_axis_fifo(request, length, data_width):
     dut = "axis_fifo"
     module = os.path.splitext(os.path.basename(__file__))[0]
     toplevel = dut
@@ -325,7 +315,6 @@ def test_axis_fifo(request, data_width, frame_fifo, drop_oversize_frame, drop_ba
 
     parameters = {}
 
-    parameters['DEPTH'] = 1024
     parameters['DATA_WIDTH'] = data_width
     parameters['KEEP_ENABLE'] = int(parameters['DATA_WIDTH'] > 8)
     parameters['KEEP_WIDTH'] = (parameters['DATA_WIDTH'] + 7) // 8
@@ -336,13 +325,7 @@ def test_axis_fifo(request, data_width, frame_fifo, drop_oversize_frame, drop_ba
     parameters['DEST_WIDTH'] = 8
     parameters['USER_ENABLE'] = 1
     parameters['USER_WIDTH'] = 1
-    parameters['PIPELINE_OUTPUT'] = 2
-    parameters['FRAME_FIFO'] = frame_fifo
-    parameters['USER_BAD_FRAME_VALUE'] = 1
-    parameters['USER_BAD_FRAME_MASK'] = 1
-    parameters['DROP_OVERSIZE_FRAME'] = drop_oversize_frame
-    parameters['DROP_BAD_FRAME'] = drop_bad_frame
-    parameters['DROP_WHEN_FULL'] = drop_when_full
+    parameters['LENGTH'] = length
 
     extra_env = {f'PARAM_{k}': str(v) for k, v in parameters.items()}
 
