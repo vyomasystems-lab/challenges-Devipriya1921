@@ -23,13 +23,11 @@ async def test_seq_bug1(dut):
     dut.reset.value = 0
     await FallingEdge(dut.clk)
 
-    cocotb.log.info('#### CTB: Develop your test here! ######')
-
-    dut.inp_bit.value = 15
+    dut.inp_bit.value = 0
     await FallingEdge(dut.clk)
-    dut.inp_bit.value = 10
+    dut.inp_bit.value = 1
     await FallingEdge(dut.clk)
-    dut.inp_bit.value = 11
+    dut.inp_bit.value = 0
     await FallingEdge(dut.clk)
     dut.inp_bit.value = 1
     await FallingEdge(dut.clk)
