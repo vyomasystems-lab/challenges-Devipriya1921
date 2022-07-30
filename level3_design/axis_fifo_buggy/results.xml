@@ -1,0 +1,33 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1659122902" />
+    <testcase name="run_test_001" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.02576279640197754" sim_time_ns="100.001" ratio_time="3881.6050260880834">
+      <failure />
+    </testcase>
+    <testcase name="run_test_002" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.026498079299926758" sim_time_ns="110.001" ratio_time="4151.282013874268">
+      <failure />
+    </testcase>
+    <testcase name="run_test_003" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.022995471954345703" sim_time_ns="110.00099999999998" ratio_time="4783.593927465006">
+      <failure />
+    </testcase>
+    <testcase name="run_test_004" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.023255586624145508" sim_time_ns="110.00100000000003" ratio_time="4730.089237387357">
+      <failure />
+    </testcase>
+    <testcase name="run_test_tuser_assert_001" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.04731440544128418" sim_time_ns="440.001" ratio_time="9299.514511410876" />
+    <testcase name="run_test_init_sink_pause_001" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.10055041313171387" sim_time_ns="1040.0010000000002" ratio_time="10343.080327652888" />
+    <testcase name="run_test_init_sink_pause_reset_001" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.1264495849609375" sim_time_ns="1420.001" ratio_time="11229.779840231688" />
+    <testcase name="run_test_overflow_001" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="3.044203996658325" sim_time_ns="41040.001000000004" ratio_time="13481.357046062063" />
+    <testcase name="run_stress_test_001" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.02733445167541504" sim_time_ns="150.00099999999657" ratio_time="5487.616937818782">
+      <failure />
+    </testcase>
+    <testcase name="run_stress_test_002" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.08000779151916504" sim_time_ns="590.0010000000038" ratio_time="7374.294288059123">
+      <failure />
+    </testcase>
+    <testcase name="run_stress_test_003" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.07616710662841797" sim_time_ns="510.00099999999657" ratio_time="6695.8169028008615">
+      <failure />
+    </testcase>
+    <testcase name="run_stress_test_004" classname="test_axis_fifo_buggy" file="/home/user/.local/lib/python3.8/site-packages/cocotb/regression.py" lineno="713" time="0.061960458755493164" sim_time_ns="470.00100000000384" ratio_time="7585.499033419203">
+      <failure />
+    </testcase>
+  </testsuite>
+</testsuites>
