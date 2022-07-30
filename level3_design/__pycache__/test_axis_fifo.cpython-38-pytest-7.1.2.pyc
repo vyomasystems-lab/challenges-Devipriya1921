@@ -1,0 +1,291 @@
+U
+    ä0äb†#  ã                   @   sð  d Z ddlZddlm  mZ ddl Z ddlZddl	Z	ddl
+Z
+ddl
+Zddl
+Z
+ddlZddlmZ ddlmZ ddlmZ ddlmZmZmZmZ G d d„ deƒZd(d	d
+„Zd
+d„ Zd
+d„ Zdd„ Zdd„ Z d)dd„Z!dd„ Z"dd„ Z#dd„ Z$ej%r–eeƒZ&e& 'de#g¡ e& 'de$g¡ e& 'dde"g¡ e& 'dde"g¡ e& (¡  eeee fD ]Z)ee)ƒZ&e& (¡  qNee!ƒZ&e& 'dde"g¡ e& 'dde"g¡ e& (¡  e	j* +e,¡Z-e	j* .e	j* /e-ddd ¡¡Z0e
+j1 2d!d"d#g¡e
+j1 2d$e3e4d%ƒƒ¡d&d'„ ƒƒZ5dS )*a$  
+
+
+é    N)ÚClock)Ú
+RisingEdge)Ú
+TestFactory)ÚAxiStreamBusÚAxiStreamFrameÚAxiStreamSourceÚ
+AxiStreamSinkc                   @   s0   e Zd Zdd„ Zd
+dd„Zd
+dd „Zdd	„ ZdS )ÚTBc                  C   sr   || _ t d¡| _| j tj¡ t  t|j	ddd 
+¡ ¡ t
+t 
+|d¡|j	|jƒ| _tt 
+|d¡|j	|jƒ| _d S ) Nz	cocotb.tbé
+   Úns)ÚunitsZs_axisZm_axis)ÚdutÚ loggingÚ	getLoggerÚlogÚsetLevelÚDEBUGÚcocotbÚ
+start_soonr   ÚclkÚstartr    r   Z
+from_prefixÚrstÚsourcer   Úsink)Úselfr
+   © r   ú1/home/user/axis_fifo_1/test_axis_pipeline_fifo.pyÚ__init__+   s    z
+TB.__init__Nc                 C   s   |r| j  |ƒ ¡ d S ©N)r   Úset_pause_generator©r   Ú	generatorr   r   r   Úset_idle_generator6   s    zTB.set_idle_generatorc                 C   s   |r| j  |ƒ ¡ d S r   )r   r   r    r   r   r   Úset_backpressure_generator:   s    zTB.set_backpressure_generatorc                 Ã   s’   | j j d¡ t| j jƒI d H  t| j jƒI d H  d| j j_t| j jƒI d H  t| j jƒI d H  d| j j_t| j jƒI d H  t| j jƒI d H  d S )Nr   é   )r
+   r   Úsetimmediatevaluer   r   Úvalue)r   r   r   r   Úreset>   s    
+
+zTB.reset)N)N) Ú__name__Ú
+__module__Ú__qualname__r   r"   r#   r'   r   r   r   r   r	   *   s   
+
+
+r	   c                 ƒ   sÚ  t | ƒ}dt|jjjƒ }d} | ¡ I d H  | |¡ |  |¡ g }‡ fdd„|ƒ D ƒD ]@}	t|	ƒ}
+| |
+_| |
+_	| 
+|
+¡ |j 
+|
+¡I d H  | d | } qX|D ]š}
+|j 
+¡ I d H }
+|
+j}|
+j}
+||
+k}|s^t d|fd||
+f¡d t ¡ ksút |
+¡rt |
+¡nd t |¡dt ¡ ks(t |
+¡r2t |
+¡ndt |
+¡d	œ }d
+d
+|i }tt |¡ƒ‚d  } }}
+|
+j}|
+j}
+||
+k}|st d|fd||
+f¡d t ¡ ks²t |
+¡r¼t |
+¡nd t |¡dt ¡ ksàt |
+¡rêt |
+¡ndt |
+¡d	œ }d
+d
+|i }tt |¡ƒ‚d  } }}
+|
+j	}|
+j	}
+||
+k}|sÎt d|fd
+||
+f¡d t ¡ ksjt |
+¡rtt |
+¡nd t |¡dt ¡ ks˜t |
+¡r¢t |
+¡ndt |
+¡d	œ }d
+d
+|i }tt |¡ƒ‚d  } }}
+|
+j}| }|s2dd t ¡ kst |
+¡rt |
+¡nd t |¡dœ }tt |¡ƒ‚d  }}qž|j}|j}|ƒ }
+|
+sªddt ¡ kspt |¡rzt |¡ndt |¡t |¡t |
+¡d	œ }tt |¡ƒ‚d  } }}
+t| jƒI d H  t| jƒI d H  d S )Né   r$   c                    s   g | ]}ˆ |ƒ‘qS r   r   )Ú.0Úx©Úpayload_datar   r   Ú
+<listcomp>Y   s     zrun_test.<locals>.<listcomp>©ú==©zH%(py2)s
+{%(py2)s = %(py0)s.tdata
+} == %(py6)s
+{%(py6)s = %(py4)s.tdata
+}Úrx_frameÚ
+test_frame©Úpy0Úpy2Úpy4Úpy6úassert %(py8)sÚpy8©zD%(py2)s
+{%(py2)s = %(py0)s.tid
+} == %(py6)s
+{%(py6)s = %(py4)s.tid
+}©zH%(py2)s
+{%(py2)s = %(py0)s.tdest
+} == %(py6)s
+{%(py6)s = %(py4)s.tdest
+}ú-assert not %(py2)s
+{%(py2)s = %(py0)s.tuser
+}©r7   r8   úZassert %(py6)s
+{%(py6)s = %(py4)s
+{%(py4)s = %(py2)s
+{%(py2)s = %(py0)s.sink
+}.empty
+}()
+}Útb)r	   Úlenr   ÚbusÚtidr'   r"   r#   r   ÚtdestÚappendÚsendr   ÚrecvÚtdataÚ
+@pytest_arÚ_call_reprcompareÚ@py_builtinsÚlocalsÚ_should_repr_global_nameÚ	_safereprÚAssertionErrorÚ_format_explanationÚtuserÚemptyr   r   )r
+   Úpayload_lengthsr/   Ú
+idle_inserterÚbackpressure_inserterrB   Úid_countÚcur_idÚ
+test_framesÚ	test_datar5   r4   Ú
+@py_assert1Ú
+@py_assert5Ú
+@py_assert3Ú
+@py_format7Ú
+@py_format9Ú
+@py_format4r   r.   r   Úrun_testJ   sn    
+
+
+
+    v       x       x      8  
+    H  rb   c           
+       Ã   sî  t | ƒ}| ¡ I d H  tt t tdƒ¡d¡ƒ}t |dd}|j 	|¡I d H  |j
+ 
+¡ I d H }|j}||k}|sòt
+ d|fd||f¡d t ¡ ksšt
+ |¡r¤t
+ |¡nd t
+ |¡dt ¡ ksÄt
+ |¡rÎt
+ |¡ndd	œ } d
+d
+| i }tt
+ |¡ƒ‚d  }}|j}|sLdd t ¡ ks"t
+ |¡r,t
+ |¡nd t
+ |¡d
+œ }	tt
+ |	¡ƒ‚d }|j
+}|j}|ƒ }
+|
+s¾ddt ¡ ks„t
+ |¡rŽt
+ |¡ndt
+ |¡t
+ |¡t
+ |
+¡dœ }tt
+ |¡ƒ‚d  } }}
+t| jƒI d H  t| jƒI d H  d S )Né   é    r$   )rS   r1   ©z-%(py2)s
+{%(py2)s = %(py0)s.tdata
+} == %(py4)sr4   r[   ©r7   r8   r9   úassert %(py6)sr:   z)assert %(py2)s
+{%(py2)s = %(py0)s.tuser
+}r@   rA   rB   r6   )r	   r'   Ú	bytearrayÚ	itertoolsÚisliceÚcycleÚranger   r   rH   r   rI   rJ   rK   rL   rM   rN   rO   rP   rQ   rR   rS   rT   r   r   )
+r
+   rB   r[   r5   r4   r\   r^   Ú
+@py_format5r_   Z
+@py_format3r]   r   r   r   Úrun_test_tuser_assertq   s6       h     8      H  rn   c                  Ã   s$  t | ƒ}| ¡ I d H  d|j_tt t  tdƒ¡d¡ƒ}t	|ƒ}|j
+ 
+|¡I d H  tdƒD ]}t| j
+ƒI d H  qZd|j_|j ¡ I d H }|j}||k} | st d| fd ||f¡dt ¡ ksÆt |¡rÐt |¡ndt |¡d	t ¡ ksðt |¡rút |¡nd	d
+œ }d
+d|i }	tt |	¡ƒ‚d  }} |j}| } | s~d
+dt ¡ ksTt |¡r^t |¡ndt |¡dœ }
+tt |
+¡ƒ‚d  }} |j}|j} | ƒ }
+|
+sôddt ¡ ksºt |¡rÄt |¡ndt |¡t | ¡t |
+¡dœ }	tt |	¡ƒ‚d  } } }
+t| j
+ƒI d H  t| j
+ƒI d H  d S )NTrc   rd   é@   Fr1   re   r4   r[   rf   rg   r:   r?   r@   rA   rB   r6   ©r	   r'   r   Úpauserh   ri   rj   rk   rl   r   r   rH   r   r   rI   rJ   rK   rL   rM   rN   rO   rP   rQ   rR   rS   rT   ©r
+   rB   r[   r5   Úkr4   r\   r^   rm   r_   ra   r]   r   r   r   Úrun_test_init_sink_pause†   s@       h      8      H  rt   c           	       Ã   s>  t | ƒ}| ¡ I d H  d|j_tt t  tdƒ¡d¡ƒ}t	|ƒ}|j
+ 
+|¡I d H  tdƒD ]}t| j
+ƒI d H  qZ| ¡ I d H  d|j_tdƒD ]}t| j
+ƒI d H  qŽ|j}|j}|ƒ } | sdd t ¡ ksÔt |¡rÞt |¡nd t |¡t |¡t | ¡dœ }tt |¡ƒ‚d  } }} t| j
+ƒI d H  t| j
+ƒI d H  d S )	NTrc   rd   ro   FrA   rB   r6   )r	   r'   r   rq   rh   ri   rj   rk   rl   r   r   rH   r   r   rT   rM   rN   rK   rO   rP   rQ   rR   )	r
+   rB   r[   r5   rs   r\   r^   r]   r_   r   r   r   Úrun_test_init_sink_pause_reset¢   s*        D  ru   c                  Ã   s$  t | ƒ}| ¡ I d H  d|j_tt t  tdƒ¡d¡ƒ}t	|ƒ}|j
+ 
+|¡I d H  tdƒD ]}t| j
+ƒI d H  qZd|j_|j ¡ I d H }|j}||k} | st d| fd||f¡d t ¡ ksÆt |¡rÐt |¡nd t |¡dt ¡ ksðt |¡rút |¡ndd	œ }d
+d
+|i }	tt |	¡ƒ‚d  }} |j}| } | s~dd t ¡ ksTt |¡r^t |¡nd t |¡d
+œ }
+tt |
+¡ƒ‚d  }} |j}|j} | ƒ }
+|
+sôddt ¡ ksºt |¡rÄt |¡ndt |¡t | ¡t |
+¡dœ }	tt |	¡ƒ‚d  } } }
+t| j
+ƒI d H  t| j
+ƒI d H  d S )NTrc   i   Fr1   re   r4   r[   rf   rg   r:   r?   r@   rA   rB   r6   rp   rr   r   r   r   Úrun_test_overflow¾   s@       h      8      H  rv   c                 Ã   s  t | ƒ}|jj}dt|jjjƒ }d}| ¡ I d H  |  |¡ | |¡ g } t	dƒD ]j}t
+ 
+d|d ¡}	tt
+ t
+ t	dƒ¡|	¡ƒ}
+t|
+ƒ}
+||
+_||
+_|  |
+¡ |j |
+¡I d H  |d | }qT| D ]œ}
+|j ¡ I d H }|j}
+|
+j}|
+|k}|s†t d|fd |
+|f¡dt ¡ ks"t |¡r,t |¡ndt |
+¡d	t ¡ ksPt |
+¡rZt |
+¡nd	t |¡d
+œ }d
+d|i }tt |¡ƒ‚d  }
+ }}|j}
+|
+j}|
+|k}|s>t d|fd
+|
+|f¡dt ¡ ksÚt |¡rät |¡ndt |
+¡d	t ¡ kst |
+¡rt |
+¡nd	t |¡d
+œ }d
+d|i }tt |¡ƒ‚d  }
+ }}|j}
+|
+j}|
+|k}|söt d|fd|
+|f¡dt ¡ ks’t |¡rœt |¡ndt |
+¡d	t ¡ ksÀt |
+¡rÊt |
+¡nd	t |¡d
+œ }d
+d|i }tt |¡ƒ‚d  }
+ }}|j}
+|
+ }|sZddt ¡ ks0t |¡r:t |¡ndt |
+¡dœ }tt |¡ƒ‚d  }
+}qÄ|j}
+|
+j }|ƒ }|sÒddt ¡ ks˜t |¡r¢t |¡ndt |
+¡t |¡t |¡d
+œ }tt |¡ƒ‚d  }
+ }}t!| j"ƒI d H  t!| j"ƒI d H  d S )Nr+   r$   é€   é   rc   r1   r3   r4   r5   r6   r;   r<   r=   r>   r?   r@   rA   rB   )#r	   r   Ú
+byte_lanesrC   rD   rE   r'   r"   r#   rl   ÚrandomÚ randintrh   ri   rj   rk   r   rF   rG   rH   r   rI   rJ   rK   rL   rM   rN   rO   rP   rQ   rR   rS   rT   r   r   )r
+   rV   rW   rB   ry   rX   rY   rZ   rs   Úlengthr[   r5   r4   r\   r]   r^   r_   r`   ra   r   r   r   Úrun_stress_testÚ   st    
+
+
+
+    x       x       x      8  
+    H  r}   c                   C   s   t  ddddg¡S )Nr$   r   )ri   rk   r   r   r   r   Ú
+cycle_pause  s    r~   c                  C   s:   t tjjƒ} | d }ttd|d d ƒƒdg dgd  S )Né   r$   é   i   ro   )rC   r   ÚtopZm_axis_tdataÚlistrl   )Ú
+data_widthZ
+byte_widthr   r   r   Ú	size_list  s    r„   c                  C   s   t t t tdƒ¡| ¡ƒS )Nrc   )rh   ri   rj   rk   rl   )r|   r   r   r   Úincrementing_payload  s    r…   rU   r/   rV   rW   z..Zrtlrƒ   r   rx   r|   é   c           
+   	   C   s   d}t j t j t¡¡d }|}t j t|› d¡g}i } || d< t | d dkƒ| d< | d d  d | d< d	| d
+< d	| d
+< d| d< d	| d
+< d| d< d	| d< d	| d< || d< dd„ |  ¡ D ƒ}t j t	d| j
+j
+ dd¡ dd¡¡}	t
+jjt	g|||| |	|d  d S )NZaxis_pipeline_fifor   z.vZ
+DATA_WIDTHr   Z
+KEEP_ENABLEé    Z
+KEEP_WIDTHr$   Z
+LAST_ENABLEZ	ID_ENABLEZID_WIDTHZ
+DEST_ENABLEZ
+DEST_WIDTHZ
+USER_ENABLEZ
+USER_WIDTHZLENGTHc                 S   s    i | ]\}}d |› t |ƒ“qS )ZPARAM_)Ústr)r,   rs   Úvr   r   r   Ú
+<dictcomp>J  s      z+test_axis_pipeline_fifo.<locals>.<dictcomp>Ú	sim_buildú[ú-ú]Ú ) Z
+python_searchÚverilog_sourcesÚtoplevelÚmoduleÚ
+parametersr‹   Ú	extra_env)ÚosÚpathÚsplitextÚbasenameÚ__file__ÚjoinÚ rtl_dirÚintÚitemsÚ	tests_dirÚnodeÚnameÚ replaceÚ
+cocotb_testÚ	simulatorÚrun)
+Ú requestr|   rƒ   r
+   r’   r‘   r   r“   r”   r‹   r   r   r   Útest_axis_pipeline_fifo1  s<    ÿ
+ÿùr¦   )NNNN)NN)6Ú __doc__ÚbuiltinsrM   Ú_pytest.assertion.rewriteÚ	assertionÚ rewriterK   ri   r   r•   rz   Zcocotb_test.simulatorr¢   Úpytestr   Zcocotb.clockr   Úcocotb.triggersr   Úcocotb.regressionr   Z
+cocotbext.axir   r   r    r   Úobjectr	   rb   rn   rt   ru   rv   r}   r~   r„   r…   ÚSIM_NAMEÚ factoryÚ
+add_optionÚgenerate_testsÚtestr–   Ú dirnamer™   rž   Ú abspathrš   r›   ÚmarkÚ
+parametrizer‚   rl   r¦   r   r   r   r   Ú<module>   s\      
+'
+*ü 
