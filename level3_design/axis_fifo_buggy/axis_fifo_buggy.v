@@ -209,8 +209,8 @@ if (LENGTH > 0) begin
         end
 
         if (rst) begin
-            out_fifo_wr_ptr_reg <= 0;
-            out_fifo_rd_ptr_reg <= 0;
+            out_fifo_wr_ptr_reg <= 1;
+            out_fifo_rd_ptr_reg <= 1;
             m_axis_tvalid_reg <= 1'b0;
         end
     end
