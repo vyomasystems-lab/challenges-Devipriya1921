@@ -98,7 +98,7 @@ The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explaine
 * Level2 Design  - Bit Manipulation Co-Processor 
 * Level3 Design  - AXI Stream FIFO
 
-## Level1 Design1 - Multiplexer
+# Level1 Design1 - Multiplexer
 
 A multiplexer or mux is a combinational circuits that selects several analog or digital input signals and forwards the selected input into a single output line. 
 A multiplexer of 2n inputs has n selected lines, are used to select which input line to send to the output.
